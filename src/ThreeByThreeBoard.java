@@ -22,7 +22,7 @@ public class ThreeByThreeBoard{
     }
 
     private Coordinates tileAt(int index) {
-        return new Coordinates(index /3, index);
+        return new Coordinates(index /3, index %3);
     }
 
     private int emptyTileIndex() {
