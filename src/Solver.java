@@ -1,7 +1,7 @@
 import java.util.*;
 
 public abstract class Solver {
-    protected Collection<Node> candidates;
+    protected Collection<Object> candidates;
     protected Set<Node> frontiers;
     protected Set<Node> explored;
     protected Node source;

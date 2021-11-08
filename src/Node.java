@@ -21,6 +21,9 @@ public class Node {
     public void setCost(int cost) {
         this.cost = cost;
     }
+    public int getCost(){
+        return cost;
+    }
 
     public int[] getState() {
         return state.getTilesOrder();
@@ -39,7 +42,9 @@ public class Node {
         if(state == null) return;
         else neighbours.add(new Node(new ThreeByThreeBoard(state), this, move));
     }
-
+    /**
+     *          USED FOR SETS, DO NOT TOUCH!
+     */
     @Override
     public boolean equals(Object other){
         Node otherNode = (Node) other;
