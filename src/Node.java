@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Node {
     private ThreeByThreeBoard state;
-    public boolean visited;
     private int cost;
     public Node parent;
     private Moves moveFromParent;
@@ -13,13 +12,15 @@ public class Node {
     public Node(ThreeByThreeBoard state, Node parent, Moves moveFromParent) {
         this.state = state;
         this.parent = parent;
-        this.visited = false;
         if(parent != null) this.cost = parent.cost + 1;
         this.moveFromParent = moveFromParent;
     }
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+    public int getCost(){
+        return cost;
     }
 
     public int[] getState() {
@@ -39,7 +40,9 @@ public class Node {
         if(state == null) return;
         else neighbours.add(new Node(new ThreeByThreeBoard(state), this, move));
     }
-
+    /**
+     *          USED FOR SETS, DO NOT TOUCH!
+     */
     @Override
     public boolean equals(Object other){
         Node otherNode = (Node) other;
