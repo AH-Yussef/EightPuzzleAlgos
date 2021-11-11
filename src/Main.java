@@ -16,19 +16,26 @@ public class Main {
 
 //         System.out.println(set.size());
 
-        int[] state = {4,3,2,6,5,0,7,8,1};
+        int[] state = {6, 4, 7, 8, 5, 0, 3, 2, 1};
+        // int[] state = {1, 0, 2, 3, 4, 5, 6, 7, 8};
         ThreeByThreeBoard tbt = new ThreeByThreeBoard(state);
-        BFS bfs = new BFS(tbt);
-        bfs.solve();
-        List<Node> path = bfs.findPath();
+        // // BFS bfs = new BFS(tbt);
+        // // bfs.solve();
+        AStarEuclidean astareuc = new AStarEuclidean(tbt);
+        astareuc.solve();
+        List<Node> path = astareuc.findPath();
 
-
+        int index=0;
         for(Node node: path) {
+            System.out.print(index++ + ": ");
             for(int n: node.getState()) {
+                
                 System.out.print(n + " ");
             }
             System.out.println();
         }
+        // Node node = new Node(tbt, null, null);
+        // System.out.println(astarman.heuristic(node));
     }
 
 }
