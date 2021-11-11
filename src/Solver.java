@@ -25,8 +25,18 @@ public abstract class Solver {
         return path;
     }
 
-    public boolean isGoalFound(Node node) {
+    protected boolean isGoalFound(Node node) {
         int[] goalState = {0, 1, 2, 3, 4, 5, 6, 7, 8};
         return Arrays.equals(node.getState(), goalState);
+    }
+
+    protected int getMaxDepth() {
+        int maxDepth = 0;
+        int cost = 0;
+        for(Node node: explored) {
+            cost = node.getCost();
+            maxDepth = Math.max(cost, maxDepth);
+        }
+        return maxDepth;
     }
 }
