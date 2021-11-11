@@ -12,4 +12,10 @@ public class HeuristicNode {
     public double getF_x(){
         return f_x;
     }
+    public void setF_X(double val){
+        f_x = val;
+    }
+    public void setNode(Node node){
+        this.node = node;
+    }
 }
