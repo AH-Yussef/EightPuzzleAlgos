@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public abstract class AStar extends Solver{
-    Node startingNode;
-    
     Node finishingNode;
     int finalCost;
     
@@ -14,7 +12,6 @@ public abstract class AStar extends Solver{
 
     public AStar(ThreeByThreeBoard boardToSolve) {
         super(boardToSolve);
-        startingNode = new Node(boardToSolve, null, null);
     }
 
     @Override
@@ -24,22 +21,17 @@ public abstract class AStar extends Solver{
         explored = new LinkedHashSet<Node>();
 
         // initialize candidates as priority queue
-        candidates = new PriorityQueue<Object>(new Comparator<Object>() {
-            @Override
-            public int compare(Object obj1, Object obj2) { // compare function to compare between nodes using their f(x)
-                HeuristicNode x = (HeuristicNode) obj1;
-                HeuristicNode y = (HeuristicNode) obj2;
-                if(x.getF_x() > y.getF_x()) return 1;
-                else if(x.getF_x() < y.getF_x()) return -1;
-                else return 0;
-            }
+        candidates = new PriorityQueue<>((obj1, obj2) -> { // compare function to compare between nodes using their f(x)
+            HeuristicNode x = (HeuristicNode) obj1;
+            HeuristicNode y = (HeuristicNode) obj2;
+            return Double.compare(x.getF_x(), y.getF_x());
         });
 
-        startingNode.setCost(-1);
+        source.setCost(-1);
         /**
          *  MAIN DRIVER
          */
-        AStarSolve(startingNode);
+        AStarSolve(source);
     }
 
     private void AStarSolve(Node node){
@@ -63,10 +55,10 @@ public abstract class AStar extends Solver{
             //if already in frontier then ignore
             // if not then put in priority queue
             Node neighbourNode = neighboursList.get(i);
-            if(frontiers.contains(neighbourNode)) continue;
+            if(frontiers.contains(neighbourNode) || explored.contains(neighbourNode)) continue;
 
             //calculating f(x) = h(x) + g(x)
-            double f_x = heuristic(neighbourNode)+(node.getCost()+1);
+            double f_x = heuristic(neighbourNode)+node.getCost();
 
             HeuristicNode hn = new HeuristicNode(node, f_x);
             candidates.add(hn);

@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Node {
     private ThreeByThreeBoard state;
-    public boolean visited;
     private int cost;
     public Node parent;
     private Moves moveFromParent;
@@ -13,7 +12,6 @@ public class Node {
     public Node(ThreeByThreeBoard state, Node parent, Moves moveFromParent) {
         this.state = state;
         this.parent = parent;
-        this.visited = false;
         if(parent != null) this.cost = parent.cost + 1;
         this.moveFromParent = moveFromParent;
     }

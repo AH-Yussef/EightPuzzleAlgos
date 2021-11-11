@@ -18,7 +18,7 @@ public class ThreeByThreeBoard{
     }
 
     private int tileAt(Coordinates coordinates) {
-        return tilesOrder[3*coordinates.row + coordinates.col];
+        return 3*coordinates.row + coordinates.col;
     }
 
     private Coordinates tileAt(int index) {
@@ -44,7 +44,6 @@ public class ThreeByThreeBoard{
         if(emptyTileCo.row == 0) return null;
 
         Coordinates upTileCo = emptyTileCo.shiftUp();
-
         return swap(upTileCo);
     }
 
