@@ -6,27 +6,17 @@ public class AStarManhattan extends AStar {
     }
 
     @Override
-    protected double heuristic(Node node) {
-        int[][] twoDgrid = oneDtwoD(node.getState());
+    public double heuristic(Node node){
         double sum = 0;
-        for(int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
-                if(twoDgrid[i][j] == 0) continue;
-                //          vertical difference             horizontal difference
-                sum += Math.abs(i-twoDgrid[i][j]/3) + Math.abs(j - twoDgrid[i][j]%3);
-            }
+        double rowDiff;
+        double colDiff;
+        int[]state = node.getState();
+        for(int i=0; i<9; i++){
+            if(state[i] == 0) continue;
+            rowDiff = Math.abs(i/3 - state[i]/3); // current row - goal row 
+            colDiff = Math.abs(i%3 - state[i]%3); // current col - goal col
+            sum += rowDiff + colDiff;
         }
         return sum;
     }
-    
-    // private int[][] oneDtwoD(int[]oneDgrid){
-    //     int[][] twoDgrid = new int[3][3];
-    //     int index= 0;
-    //     for(int i=0; i<3; i++){
-    //         for(int j=0; j<3; j++){
-    //             twoDgrid[i][j] = oneDgrid[index++];
-    //         }
-    //     }
-    //     return twoDgrid;
-    // }
 }
