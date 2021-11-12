@@ -17,14 +17,31 @@ public class Main {
 //         System.out.println(set.size());
 
         int[] state = {6, 4, 7, 8, 5, 0, 3, 2, 1};
+        // int[] state = {4, 3, 2, 6, 5, 0, 7, 8, 1};
         // int[] state = {1, 0, 2, 3, 4, 5, 6, 7, 8};
         ThreeByThreeBoard tbt = new ThreeByThreeBoard(state);
-        // // BFS bfs = new BFS(tbt);
-        // // bfs.solve();
-        AStarEuclidean astareuc = new AStarEuclidean(tbt);
-        astareuc.solve();
-        List<Node> path = astareuc.findPath();
 
+        // AStar euclidean
+        // AStarEuclidean astareuc = new AStarEuclidean(tbt);
+        AStarEuclidean astareuc = new AStarEuclidean(tbt);
+        Node node = new Node(tbt, null, null);
+        System.out.println(astareuc.heuristic(node));
+        // BFS bfs = new BFS(tbt);
+        astareuc.solve();
+        // for(int i=0; i<10; i++){
+        //     long start = System.nanoTime();
+        //     astarman.solve();
+        //     long finish = System.nanoTime();
+        //     System.out.println(finish-start);
+        // }
+        List<Node> path = astareuc.findPath();
+        displayPath(path);
+        System.out.println(astareuc.explored.size());
+        System.out.println(astareuc.getMaxDepth());
+        // Node node = new Node(tbt, null, null);
+        // System.out.println(astarman.heuristic(node));
+    }
+    private static void displayPath(List<Node> path){
         int index=0;
         for(Node node: path) {
             System.out.print(index++ + ": ");
@@ -34,8 +51,6 @@ public class Main {
             }
             System.out.println();
         }
-        // Node node = new Node(tbt, null, null);
-        // System.out.println(astarman.heuristic(node));
     }
 
 }
